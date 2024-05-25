@@ -8,10 +8,7 @@ const AsideMenu: React.FC<AsideMenuProps> = () => {
     const location = useLocation();
 	const linksArray = [
 		{ url: "/home", name: "Home" },
-		{ url: "/measurements", name: "Measurements" },
-		{ url: "/habits", name: "Habits" },
-		{ url: "/workouts", name: "Workouts" },
-		{ url: "/settings", name: "Settings" },
+		{ url: "/report", name: "Report" },
 	];
 	// TODO delete
 	const avatar =
