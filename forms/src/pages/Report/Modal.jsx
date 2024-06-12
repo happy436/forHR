@@ -8,9 +8,7 @@ import {
 } from "@tremor/react";
 import React from "react";
 
-type ModalProps = {};
-
-const Modal: React.FC<ModalProps> = ({
+const Modal = ({
 	handleChange,
 	isOpen,
 	setIsOpen,

@@ -1,33 +1,23 @@
 import {
 	Button,
 	Card,
-	Dialog,
-	DialogPanel,
-	SearchSelect,
-	SearchSelectItem,
-	TextInput,
 } from "@tremor/react";
 import React, { useEffect, useState } from "react";
 import Modal from "./Modal";
 import { RiEditLine } from "@remixicon/react";
 import { nanoid } from "nanoid";
 import { Bounce, toast } from "react-toastify";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-type ReportProps = {};
-
-const Report: React.FC<ReportProps> = () => {
+const Report = () => {
     const location = useNavigate()
 	const needHours = 176;
 	const [edit, setEdit] = useState(false);
-	const [relax, setRelax] = useState(16);
+	const [relax] = useState(16);
 	const [hours, setHours] = useState(relax);
 	const [data, setData] = useState([]);
-	const handleCreateActivity = () => {
-		setActivityList();
-	};
 	const [task, setTask] = useState({});
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (e) => {
 		setTask((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 	};
 	const [isOpen, setIsOpen] = useState(false);

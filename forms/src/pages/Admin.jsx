@@ -1,9 +1,7 @@
 import { Badge, Button, Card, Divider } from "@tremor/react";
 import React, { useState } from "react";
 
-type AdminProps = {};
-
-const Admin: React.FC<AdminProps> = () => {
+const Admin = () => {
 	const listTaskTypes = [
 		"Двигун",
 		"Клапан",
