@@ -6,7 +6,7 @@ import {
 	SearchSelectItem,
 	TextInput,
 } from "@tremor/react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 type ModalProps = {};
 
@@ -38,6 +38,7 @@ const Modal: React.FC<ModalProps> = ({
 						onChange={handleChange}
 						name="hours"
 						value={data.hours}
+                        type="number"
 					/>
 					<div className="mb-4 mt-8 text-center font-mono text-sm text-slate-500">
 						Тип задачі

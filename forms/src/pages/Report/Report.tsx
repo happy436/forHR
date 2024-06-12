@@ -11,12 +11,15 @@ import React, { useEffect, useState } from "react";
 import Modal from "./Modal";
 import { RiEditLine } from "@remixicon/react";
 import { nanoid } from "nanoid";
+import { Bounce, toast } from "react-toastify";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type ReportProps = {};
 
 const Report: React.FC<ReportProps> = () => {
-    const needHours = 90
-    const [edit, setEdit] = useState(false);
+    const location = useNavigate()
+	const needHours = 176;
+	const [edit, setEdit] = useState(false);
 	const [relax, setRelax] = useState(16);
 	const [hours, setHours] = useState(relax);
 	const [data, setData] = useState([]);
@@ -29,30 +32,33 @@ const Report: React.FC<ReportProps> = () => {
 	};
 	const [isOpen, setIsOpen] = useState(false);
 
-    useEffect(() => console.log(hours == needHours))
+	useEffect(() => console.log(hours == needHours));
 
 	const handleCreateTask = () => {
-        setEdit(false)
+		setEdit(false);
 		setIsOpen(false);
 		console.log(task);
 		setData((prev) => [...prev, { ...task, id: nanoid() }]);
 	};
 
 	useEffect(() => {
-		const sumHours = data.reduce((sum, item) => Number(sum) + Number(item.hours), 0);
+		const sumHours = data.reduce(
+			(sum, item) => Number(sum) + Number(item.hours),
+			0
+		);
 		setHours(Number(sumHours) + Number(relax));
 		//console.log(data)
 	}, [data]);
 
 	const handleEditTask = (ID) => {
-        setEdit(true)
+		setEdit(true);
 		setIsOpen(true);
 		const task = data.find((task) => task.id === ID);
 		setTask(task);
 	};
 
 	const handleConfirmEditTask = (ID) => {
-        setEdit(false)
+		setEdit(false);
 		setIsOpen(false);
 		setData((prevData) =>
 			prevData.map((item) =>
@@ -61,10 +67,39 @@ const Report: React.FC<ReportProps> = () => {
 		);
 	};
 
+	const onSubmit = (e) => {
+		e.preventDefault();
+        if(data.length === 0){
+            toast.error("Отчет пустой!", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Bounce,
+            });
+            return null;
+        }
+		toast.success("Отчет направлен в обработку!", {
+			position: "top-right",
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: "dark",
+			transition: Bounce,
+		});
+        location('/home')
+	};
+
 	return (
 		<section>
-			<div>
-				<h1>Ivan Ivanov</h1>
+			<div className="mb-3">
 				<h1>Создать репорт</h1>
 			</div>
 
@@ -75,13 +110,15 @@ const Report: React.FC<ReportProps> = () => {
 				handleCreateTask={handleCreateTask}
 				data={task}
 				handleConfirmEditTask={handleConfirmEditTask}
-                edit={edit}
+				edit={edit}
 			/>
 			<div>
 				<form className="flex flex-col gap-5">
 					<Card>
 						<div>
-							<p>Часов: {hours} / {needHours}</p>
+							<p>
+								Часов: {hours} / {needHours}
+							</p>
 							<p>Дней по болезни: 1 - 19.05.2024</p>
 							<p>Отпуск: 1 - 18.05.2024</p>
 						</div>
@@ -111,19 +148,26 @@ const Report: React.FC<ReportProps> = () => {
 									</Card>
 								))}
 							</ul>
-                            {
-							(hours !== needHours) && <Button
-								onClick={() => {
-                                    setTask({})
-									setIsOpen(true);
-								}}
-								type="button"
-							>
-								Добавить активность
-							</Button> }
+							{hours !== needHours && (
+								<Button
+									onClick={() => {
+										setTask({});
+										setIsOpen(true);
+									}}
+									type="button"
+								>
+									Добавить активность
+								</Button>
+							)}
 						</div>
 					</Card>
-                    <Button color="green">Отправить отчет</Button>
+					<Button
+						color="green"
+						type="submit"
+						onClick={(e) => onSubmit(e)}
+					>
+						Отправить отчет
+					</Button>
 				</form>
 			</div>
 		</section>

@@ -7,9 +7,9 @@ import Report from "./pages/Report/Report";
 
 const Default = () => {
 	return (
-		<div className="flex w-100 h-100 flex-col justify-center align-center">
+		<div className="flex w-screen h-screen flex-col justify-center align-center">
 			<p className="self-center">Links</p>
-			<div className="flex gap-3">
+			<div className="flex gap-3 justify-center">
 				<Link to="/admin">
 					<Card>
 						<p className="text-white">Admin</p>
