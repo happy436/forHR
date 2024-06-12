@@ -15,7 +15,7 @@ const Default = () => {
 						<p className="text-white">Admin</p>
 					</Card>
 				</Link>
-				<Link to="/worker">
+				<Link to="/home">
 					<Card>
 						<p className="text-white">Worker</p>
 					</Card>
@@ -32,9 +32,9 @@ function App() {
 			<Routes location={location} key={location.pathname}>
 				<Route path="/" element={<Default />} />
 				<Route path="/*" element={<MainPage />}>
-                    <Route path="admin" element={<Admin />}/>
-                    <Route path="report" element={<Report />} />
-					<Route path="home" element={<Worker />}/>
+					<Route path="admin" element={<Admin />} />
+					<Route path="report" element={<Report />} />
+					<Route path="home" element={<Worker />} />
 				</Route>
 			</Routes>
 		</>
