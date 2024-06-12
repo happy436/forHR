@@ -30,7 +30,7 @@ function App() {
 	return (
 		<>
 			<Routes location={location} key={location.pathname}>
-				<Route path="/" element={<Default />} />
+				<Route path="/forHR" element={<Default />} />
 				<Route path="/*" element={<MainPage />}>
 					<Route path="admin" element={<Admin />} />
 					<Route path="report" element={<Report />} />
